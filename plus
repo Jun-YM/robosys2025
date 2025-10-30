@@ -1,0 +1,11 @@
+#!/usr/bin/python3
+# SPDX-FileCopyrightText: 2025 Junpei Yamamoto <s24C1133la@s.chibakoudai.jp>
+
+import sys
+   
+ans = 0.0
+for line in sys.stdin:
+    ans += float(line)
+     
+print(ans)
+
