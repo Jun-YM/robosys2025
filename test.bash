@@ -1,25 +1,57 @@
 #!/bin/bash
 # SPDX-FileCopyrightText: 2025 Junpei Yamamoto <s24C1133la@chibakoudai.jp>
+# SPDX-License-Identifier: BSD-3-Clause
 
+COMMAND="./TCGcheck"
+
+# エラー判定関数
 ng () {
-        echo ${1}行目が違うヨ
-        res=1
+    echo "${1}行目が違うヨ"
+    res=1
 }
 
 res=0
 
-### NORMAL INPUT ###
-out=$(seq 5 | ./plus)
-[ "${out}" = 15.0 ] || ng "$LINENO"
+# --- ① 正常な入力の場合 ---
 
-### STRANGE INPUT ###
-out=$(echo あ | ./plus)           #計算できない値を入力してみる
-[ "$?" = 1 ]      || ng "$LINENO" #終了ステータスが1なのを確認
-[ "${out}" = "" ] || ng "$LINENO" #この行と上の行は入れ替えるとダメです
-					#（↑なぜかは考えてみましょう）
-out=$(echo | ./plus)              #なにも入力しない
-[ "$?" = 1 ]      || ng "$LINENO" #これも異常終了する
+# 3枚で33.76%が出るか
+out=$(echo 3 | $COMMAND)
+[ "${out}" = "33.76%" ] || ng "$LINENO"
+
+# 0枚で0.00%が出るか
+out=$(echo 0 | $COMMAND)
+[ "${out}" = "0.00%" ] || ng "$LINENO"
+
+# 36枚で100.00%が出るか
+out=$(echo 36 | $COMMAND)
+[ "${out}" = "100.00%" ] || ng "$LINENO"
+
+# 全角数字で入力された場合
+out=$(echo ３ | $COMMAND | tr -d '\n')
+[ "${out}" = "33.76%" ] || ng "$LINENO"
+
+# 全角数字と半角数字で入力された場合(３1)
+out=$(echo ３1| $COMMAND | tr -d '\n')
+[ "${out}" = "99.97%" ] || ng "$LINENO"
+
+# --- ② 異常な入力の場合 ---
+
+# 範囲外（プラス方向）
+out=$(echo 41 | $COMMAND)
+[ "${out}" = "負またはデッキ上限より大きい数です" ] || ng "$LINENO"
+
+# 範囲外（マイナス方向）
+out=$(echo -1 | $COMMAND)
+[ "${out}" = "負またはデッキ上限より大きい数です" ] || ng "$LINENO"
+
+# 数字以外が来た場合
+out=$(echo あ | $COMMAND)
+[ "${out}" = "数字を入力してください" ] || ng "$LINENO"
+
+# 空の入力
+out=$(echo | $COMMAND)
 [ "${out}" = "" ] || ng "$LINENO"
 
-[ "${res}" = 0 ] && echo OK #通ったのが（人間に）分かるように表示
+### 結果表示 ###
+[ "${res}" = 0 ] && echo OK
 exit $res
