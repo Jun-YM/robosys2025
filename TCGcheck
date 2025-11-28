@@ -1,0 +1,27 @@
+#!/usr/bin/python3
+# SPDX-FileCopyrightText: 2025 Junpei Yamamoto <s24C1133la@s.chibakoudai.jp>
+# SPDX-License-Identifier: BSD-3-Clause
+import sys
+def main():
+    probs = [
+         0.00, 12.50, 22.43, 30.44, 37.00, 42.46, 47.08, 51.05, 54.48, 57.49,
+        60.14, 62.49, 64.59, 66.47, 68.17, 69.70, 71.09, 72.35, 73.51, 74.56,
+        75.53, 76.41, 77.23, 77.98, 78.67, 79.30, 79.88, 80.41, 80.91, 81.36,
+        81.78, 82.17, 82.53, 82.87, 83.18, 83.47, 100.00, 100.00, 100.00, 100.00, 100.00
+    ]
+    for line in sys.stdin:
+        try:
+            line = line.strip()
+            if not line:
+                continue
+            n = int(line)
+
+            if 0 <= n <= 40 :
+                print(f"{probs[n]}%")
+            else:
+                print("負またはデッキ上限より大きい数です")
+
+        except ValueError:
+            print("数字を入力してください")
+if __name__ == '__main__':
+    main()
