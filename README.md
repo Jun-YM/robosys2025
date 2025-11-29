@@ -11,22 +11,22 @@
 ## 準備
 - このリポジトリをターミナルで下記のようにクローンしてください。
 ``` 
-$ git clone https://github.com/Jun-YM/robosys2025.git
+git clone https://github.com/Jun-YM/robosys2025.git
 ```
 
 - 下記のディレクトリに移動して、権限を付与してください。
 ```
-$ cd robosys2025
+cd robosys2025
 ```
 ```
-$ chmod +x tcgcheck
+chmod +x tcgcheck
 ```
 
 ## 使い方
 - 実行方法の例
 
 ```
-$ echo 3 | ./tcgcheck
+echo 3 | ./tcgcheck
 ```
 
 - 実行結果の例
