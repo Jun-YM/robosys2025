@@ -19,9 +19,12 @@ def main():
             if 0 <= n <= 40 :
                 print(f"{probs[n]}%")
             else:
-                print("負またはデッキ上限より大きい数です")
+                print("負または40より大きい数です", file=sys.stderr)
+                sys.exit(1)
 
         except ValueError:
-            print("数字を入力してください")
+            print("数字を入力してください", file=sys.stderr)
+            sys.exit(1)
+
 if __name__ == '__main__':
     main()
