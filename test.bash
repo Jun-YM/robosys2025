@@ -37,15 +37,15 @@ out=$(echo ３1| $COMMAND | tr -d '\n')
 # --- ② 異常な入力の場合 ---
 
 # 範囲外（プラス方向）
-out=$(echo 41 | $COMMAND)
+out=$(echo 41 | $COMMAND 2>&1)
 [ "${out}" = "負または40より大きい数です" ] || ng "$LINENO"
 
 # 範囲外（マイナス方向）
-out=$(echo -1 | $COMMAND)
+out=$(echo -1 | $COMMAND 2>&1)
 [ "${out}" = "負または40より大きい数です" ] || ng "$LINENO"
 
 # 数字以外が来た場合
-out=$(echo あ | $COMMAND)
+out=$(echo あ | $COMMAND 2>&1
 [ "${out}" = "数字を入力してください" ] || ng "$LINENO"
 
 # 空の入力
