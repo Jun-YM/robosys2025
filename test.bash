@@ -16,23 +16,23 @@ res=0
 
 # 3枚で33.76%が出るか
 out=$(echo 3 | $COMMAND)
-[ "${out}" = "33.76%" ] || ng "$LINENO"
+[ "${out}" = "33.76" ] || ng "$LINENO"
 
 # 0枚で0.00%が出るか
 out=$(echo 0 | $COMMAND)
-[ "${out}" = "0.00%" ] || ng "$LINENO"
+[ "${out}" = "0.00" ] || ng "$LINENO"
 
 # 36枚で100.00%が出るか
 out=$(echo 36 | $COMMAND)
-[ "${out}" = "100.00%" ] || ng "$LINENO"
+[ "${out}" = "100.00" ] || ng "$LINENO"
 
 # 全角数字で入力された場合
 out=$(echo ３ | $COMMAND | tr -d '\n')
-[ "${out}" = "33.76%" ] || ng "$LINENO"
+[ "${out}" = "33.76" ] || ng "$LINENO"
 
 # 全角数字と半角数字で入力された場合(３1)
 out=$(echo ３1| $COMMAND | tr -d '\n')
-[ "${out}" = "99.97%" ] || ng "$LINENO"
+[ "${out}" = "99.97" ] || ng "$LINENO"
 
 
 # --- ② 異常な入力の場合 ---
