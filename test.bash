@@ -1,5 +1,5 @@
 #!/bin/bash
-# SPDX-FileCopyrightText: 2025 Junpei Yamamoto <s24C1133la@chibakoudai.jp>
+# SPDX-FileCopyrightText: 2025 Junpei Yamamoto <s24C1133la@s.chibakoudai.jp>
 # SPDX-License-Identifier: BSD-3-Clause
 
 COMMAND="./tcgcheck"
