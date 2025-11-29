@@ -12,17 +12,17 @@ ng () {
 
 res=0
 
-# --- ① 正常な入力の場合 ---
+#正常な入力の場合
 
-# 3枚で33.76が出るか
+# 3枚の場合
 out=$(echo 3 | $COMMAND)
 [ "${out}" = "33.76" ] || ng "$LINENO"
 
-# 0枚で0.00が出るか
+# 0枚の場合
 out=$(echo 0 | $COMMAND)
 [ "${out}" = "0.00" ] || ng "$LINENO"
 
-# 36枚で100.00が出るか
+# 36枚の場合
 out=$(echo 36 | $COMMAND)
 [ "${out}" = "100.00" ] || ng "$LINENO"
 
@@ -34,16 +34,17 @@ out=$(echo ３ | $COMMAND | tr -d '\n')
 out=$(echo ３1| $COMMAND | tr -d '\n')
 [ "${out}" = "99.97" ] || ng "$LINENO"
 
+#異常な入力の場合
 
-# --- ② 異常な入力の場合 ---
-
-# 範囲外
+# 範囲外（プラス方向）
 out=$(echo 41 | $COMMAND 2>&1)
 [ "${out}" = "負または40より大きい数です" ] || ng "$LINENO"
+
+# 範囲外（マイナス方向）
 out=$(echo -1 | $COMMAND 2>&1)
 [ "${out}" = "負または40より大きい数です" ] || ng "$LINENO"
 
-# 数字以外の場合
+# 数字以外が来た場合
 out=$(echo あ | $COMMAND 2>&1)
 [ "${out}" = "数字を入力してください" ] || ng "$LINENO"
 
@@ -51,6 +52,6 @@ out=$(echo あ | $COMMAND 2>&1)
 out=$(echo | $COMMAND)
 [ "${out}" = "" ] || ng "$LINENO"
 
-# 結果
+# 結果表示
 [ "${res}" = 0 ] && echo OK
 exit $res
