@@ -34,24 +34,23 @@ out=$(echo ３ | $COMMAND | tr -d '\n')
 out=$(echo ３1| $COMMAND | tr -d '\n')
 [ "${out}" = "99.97%" ] || ng "$LINENO"
 
+
 # --- ② 異常な入力の場合 ---
 
-# 範囲外（プラス方向）
+# 範囲外
 out=$(echo 41 | $COMMAND 2>&1)
 [ "${out}" = "負または40より大きい数です" ] || ng "$LINENO"
-
-# 範囲外（マイナス方向）
 out=$(echo -1 | $COMMAND 2>&1)
 [ "${out}" = "負または40より大きい数です" ] || ng "$LINENO"
 
-# 数字以外が来た場合
-out=$(echo あ | $COMMAND 2>&1
+# 数字以外の場合
+out=$(echo あ | $COMMAND 2>&1)
 [ "${out}" = "数字を入力してください" ] || ng "$LINENO"
 
 # 空の入力
 out=$(echo | $COMMAND)
 [ "${out}" = "" ] || ng "$LINENO"
 
-### 結果表示 ###
+# 結果
 [ "${res}" = 0 ] && echo OK
 exit $res
