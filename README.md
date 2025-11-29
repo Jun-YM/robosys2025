@@ -1,7 +1,7 @@
 # robosys2025
 ロボットシステム学課題
 
-# TCGcheckコマンド
+# tcgcheckコマンド
 ![test](https://github.com/Jun-YM/robosys2025/actions/workflows/test.yml/badge.svg)
 
 40枚のカードの束から5枚を引いたとき、40枚中N枚入っている特定のカードを1枚以上引ける確率を提示します
@@ -19,14 +19,14 @@ $ git clone https://github.com/Jun-YM/robosys2025.git
 $ cd robosys2025
 ```
 ```
-$ chmod +x TCGcheck
+$ chmod +x tcgcheck
 ```
 
 ## 使い方
 - 実行方法の例
 
 ```
-$ echo 3 | ./TCGcheck
+$ echo 3 | ./tcgcheck
 ```
 
 - 実行結果の例

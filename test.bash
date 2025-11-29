@@ -2,7 +2,7 @@
 # SPDX-FileCopyrightText: 2025 Junpei Yamamoto <s24C1133la@chibakoudai.jp>
 # SPDX-License-Identifier: BSD-3-Clause
 
-COMMAND="./TCGcheck"
+COMMAND="./tcgcheck"
 
 # エラー判定関数
 ng () {
