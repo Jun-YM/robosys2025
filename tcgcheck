@@ -17,7 +17,7 @@ def main():
             n = int(line)
 
             if 0 <= n <= 40 :
-                print(f"{probs[n]}%")
+                print(f"{probs[n]}")
             else:
                 print("負または40より大きい数です", file=sys.stderr)
                 sys.exit(1)
