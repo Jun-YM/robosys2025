@@ -16,17 +16,20 @@ $ git clone https://github.com/Jun-YM/robosys2025.git
 - 下記のディレクトリに移動して、権限を付与してください。
 ```
 $ cd ~/robosys2025/
-
+```
+```
 $ chmod +x TCGcheck
 ```
 
 ## 使い方
 - 実行方法の例
+
 ```
 $ echo 3 | ./TCGcheck
-
+```
 
 - 実行結果の例
+
 ```
 33.76%
 ```
