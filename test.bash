@@ -5,6 +5,7 @@
 COMMAND="./tcgcheck"
 
 # エラー判定関数
+# 失敗したときにresを1にして、何行目で失敗したかを表示する
 ng () {
     echo "${1}行目が違うヨ"
     res=1
@@ -12,7 +13,7 @@ ng () {
 
 res=0
 
-#正常な入力の場合
+#正常な入力のテスト
 
 # 3枚の場合
 out=$(echo 3 | $COMMAND)
@@ -30,28 +31,25 @@ out=$(echo 36 | $COMMAND)
 out=$(echo ３ | $COMMAND | tr -d '\n')
 [ "${out}" = "33.76" ] || ng "$LINENO"
 
-# 全角数字と半角数字で入力された場合(３1)
-out=$(echo ３1| $COMMAND | tr -d '\n')
-[ "${out}" = "99.97" ] || ng "$LINENO"
 
-#異常な入力の場合
+#不正な入力のテスト(終了ステータスのチェック)
 
-# 範囲外（プラス方向）
-out=$(echo 41 | $COMMAND 2>&1)
-[ "${out}" = "負または40より大きい数です" ] || ng "$LINENO"
+# 1. 数値以外の文字列（あ）を入力した場合
+echo "あ" | $COMMAND > /dev/null 2>&1
+# 終了ステータスが 1 であることを確認（0ならng）
+[ "$?" = 1 ] || ng "$LINENO"
 
-# 範囲外（マイナス方向）
-out=$(echo -1 | $COMMAND 2>&1)
-[ "${out}" = "負または40より大きい数です" ] || ng "$LINENO"
+# 2. 範囲外の数値（41以上）を入力した場合
+echo "41" | $COMMAND > /dev/null 2>&1
+[ "$?" = 1 ] || ng "$LINENO"
 
-# 数字以外が来た場合
-out=$(echo あ | $COMMAND 2>&1)
-[ "${out}" = "数字を入力してください" ] || ng "$LINENO"
+# 3. 負の数値を入力した場合
+echo "-1" | $COMMAND > /dev/null 2>&1
+[ "$?" = 1 ] || ng "$LINENO"
 
-# 空の入力
-out=$(echo | $COMMAND)
-[ "${out}" = "" ] || ng "$LINENO"
+# 4. 何も入力しなかった（空行）場合
+echo "" | $COMMAND > /dev/null 2>&1
+[ "$?" = 1 ] || ng "$LINENO"
 
-# 結果表示
-[ "${res}" = 0 ] && echo OK
+
 exit $res

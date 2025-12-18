@@ -10,20 +10,25 @@ probs = [
     "99.95", "99.97", "99.99", "99.99", "99.99", "99.99", "100.00", "100.00", "100.00", "100.00", "100.00"
 ]
 
-for line in sys.stdin:
+def main():
+
+    lines = sys.stdin.readlines()
+    
+    if not lines or not lines[0].strip():
+        print("入力が空です", file=sys.stderr)
+        sys.exit(1)
+    line = lines[0].strip()
     try:
-        line = line.strip()
-        if not line:
-            continue
         n = int(line)
-
         if 0 <= n <= 40:
-
             print(f"{probs[n]}")
+            sys.exit(0) # 正常終了
         else:
             print("負または40より大きい数です", file=sys.stderr)
-            sys.exit(1)
-
+            sys.exit(1) # 異常終了
     except ValueError:
         print("数字を入力してください", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(1) # 異常終了
+
+if __name__ == "__main__":
+    main()
