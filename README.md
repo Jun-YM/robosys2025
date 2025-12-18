@@ -36,17 +36,13 @@ echo 3 | ./tcgcheck
 ## テスト環境
 - 本パッケージは、ローカル環境およびGitHub Actionsによるリモート環境の両方でテスト済みです。
 
-ローカル環境
+ - ローカル環境
+   Ubuntu 22.04.5 LTS
+   Python: 3.10.x
 
-Ubuntu 22.04.5 LTS
-
-Python: 3.10.x
-
-リモート環境
-
-Ubuntu 22.04(ubuntu-latest)
-
-Python 3.7~3.10
+ - リモート環境
+   Ubuntu 22.04(ubuntu-latest)
+   Python 3.7~3.10
 
 
 ## ライセンス
