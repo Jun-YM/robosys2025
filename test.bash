@@ -36,7 +36,7 @@ out=$(echo ３ | $COMMAND | tr -d '\n')
 
 # 1. 数値以外の文字列（あ）を入力した場合
 echo "あ" | $COMMAND > /dev/null 2>&1
-# 終了ステータスが 1 であることを確認（0ならng）
+# 終了ステータスが1を確認
 [ "$?" = 1 ] || ng "$LINENO"
 
 # 2. 範囲外の数値（41以上）を入力した場合
@@ -47,7 +47,7 @@ echo "41" | $COMMAND > /dev/null 2>&1
 echo "-1" | $COMMAND > /dev/null 2>&1
 [ "$?" = 1 ] || ng "$LINENO"
 
-# 4. 何も入力しなかった（空行）場合
+# 4. 何も入力しなかった場合
 echo "" | $COMMAND > /dev/null 2>&1
 [ "$?" = 1 ] || ng "$LINENO"
 
